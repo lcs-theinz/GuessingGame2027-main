@@ -55,7 +55,7 @@ struct GuessingGameView: View {
 
             // The title at the top of the screen.
             HStack {
-                Image(systemName: "sparkle.magnifyingglass")
+                Image(systemName: "1.magnifyingglass")
                 Text("Guessing Game")
             }
             .font(.largeTitle)
@@ -125,8 +125,10 @@ struct GuessingGameView: View {
                 }
                 .buttonStyle(.borderedProminent)
             }
-
-            Text("Guesses so far: \(guessCount)")
+            HStack{
+                Image(systemName: "dice.fill")
+                Text("Guesses so far: \(guessCount)")
+            }
                 .font(.headline)
                 .foregroundStyle(Color.secondary)
         }
@@ -139,7 +141,6 @@ struct GuessingGameView: View {
         // How big the game's window is on the Mac. It can be made taller or wider.
         .frame(minWidth: 420, minHeight: 640)
     }
-
     // MARK: - Functions
 
     // Checks the player's guess against the secret number.
@@ -156,7 +157,7 @@ struct GuessingGameView: View {
         } else {
             // TRY: Change this message. Make it kinder, or sillier.
             message = "\(guess) is not my number. Try again."
-            messageSymbol = "xmark.circle.fill"
+            messageSymbol = "hand.thumbsdown"
             messageColor = Color.red
         }
     }
