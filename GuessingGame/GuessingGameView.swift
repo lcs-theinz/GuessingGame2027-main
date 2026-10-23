@@ -93,16 +93,16 @@ struct GuessingGameView: View {
             // The code inside the braces runs when that button is clicked.
             HStack(spacing: 8) {
                 Button("-10") {
-                    lowerGuessByTen()
+                    changeGuess(by: -10)
                 }
                 Button("-1") {
-                    lowerGuessByOne()
+                    changeGuess(by: -1)
                 }
                 Button("+1") {
-                    raiseGuessByOne()
+                    changeGuess(by: 1)
                 }
                 Button("+10") {
-                    raiseGuessByTen()
+                    changeGuess(by: 10)
                 }
             }
             .buttonStyle(.bordered)
@@ -142,7 +142,17 @@ struct GuessingGameView: View {
         .frame(minWidth: 420, minHeight: 640)
     }
     // MARK: - Functions
-
+    // Changes the guess by the amount given, but keeps it inside the range.
+    // A negative amount makes the guess smaller.
+    func changeGuess(by amount: Int) {
+        guess += amount
+        if guess < lowestNumber {
+            guess = lowestNumber
+        }
+        if guess > highestNumber {
+            guess = highestNumber
+        }
+    }
     // Checks the player's guess against the secret number.
     func checkGuess() {
 
@@ -175,22 +185,6 @@ struct GuessingGameView: View {
         guess -= 1
         if guess < lowestNumber {
             guess = lowestNumber
-        }
-    }
-
-    // Makes the guess 1 bigger, but never bigger than the highest number.
-    func raiseGuessByOne() {
-        guess += 1
-        if guess > highestNumber {
-            guess = highestNumber
-        }
-    }
-
-    // Makes the guess 10 bigger, but never bigger than the highest number.
-    func raiseGuessByTen() {
-        guess += 10
-        if guess > highestNumber {
-            guess = highestNumber
         }
     }
 
